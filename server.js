@@ -109,7 +109,7 @@ app.post('/getVerses', async (req, res) => {
 
         res.json({ words: wordArray });
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred while fetching the verses.' });
+        res.status(500).json({ error: 'Oh no! An error occurred while fetching the verses.' });
     }
 });
 
