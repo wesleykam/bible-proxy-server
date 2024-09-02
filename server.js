@@ -8,6 +8,10 @@ const PORT = process.env.PORT || 3000;
 // Enable CORS for all routes
 app.use(cors());
 
+app.options('/*', (_, res) => {
+    res.sendStatus(200);
+});
+
 app.use(express.json());
 
 app.post('/getVerses', async (req, res) => {
@@ -89,25 +93,31 @@ app.post('/getVerses', async (req, res) => {
 
         const data = response.data;
 
-        let wordArray = [];
+        let cleanedWordArray = [];
+        let dirtyWordArray = [];
 
         if (verse.end_verse) {
             const verses = [];
 
             for (let i = verse.start_verse - 1; i < verse.end_verse; i++) {
+                dirtyWords = data[i].verse.split(/\s+/);
+                dirtyWordArray = dirtyWordArray.concat(dirtyWords);
+
                 verses.push(data[i].verse.replace(/[^a-zA-Z\s]/g, ''));
             }
 
             verses.forEach((str) => {
                 let words = str.split(/\s+/); // Split by one or more spaces
-                wordArray = wordArray.concat(words);
+                cleanedWordArray = cleanedWordArray.concat(words);
             });
         } else {
+            dirtyWordArray = data[verse.start_verse - 1].verse.split(/\s+/);
+
             const cleanVerse = data[verse.start_verse - 1].verse.replace(/[^a-zA-Z\s]/g, '');
-            wordArray = cleanVerse.split(/\s+/);
+            cleanedWordArray = cleanVerse.split(/\s+/);
         }
 
-        res.json({ words: wordArray });
+        res.json({ words: cleanedWordArray, dirtyWords: dirtyWordArray });
     } catch (error) {
         res.status(500).json({ error: 'Oh no! An error occurred while fetching the verses.' });
     }
