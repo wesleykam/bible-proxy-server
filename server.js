@@ -3,7 +3,7 @@ const axios = require('axios');
 const cors = require('cors'); // Import cors
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Enable CORS for all routes
 app.use(cors());

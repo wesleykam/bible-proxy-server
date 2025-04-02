@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +14,13 @@
     "axios": "^1.7.5",
     "cors": "^2.8.5",
     "express": "^4.19.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wesleykam/bible-proxy-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wesleykam/bible-proxy-server/issues"
+  },
+  "homepage": "https://github.com/wesleykam/bible-proxy-server#readme"
 }
